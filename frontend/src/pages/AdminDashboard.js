@@ -127,7 +127,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     
     getdata();
-  }, []);
+  }, [getdata]);
 
   return (
     <div className='min-h-screen bg-gray-100'>
