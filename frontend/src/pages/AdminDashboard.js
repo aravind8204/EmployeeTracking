@@ -11,7 +11,8 @@ import { v4 as uuidv4 } from 'uuid';
 import emailjs from '@emailjs/browser';
 import { IoIosAdd } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
-import { FaTasks, FaChartBar, FaArrowLeft,FaTrash, FaEdit, FaClipboardList, FaChartPie } from 'react-icons/fa';
+import { FaTasks, FaChartBar, FaArrowLeft,FaTrash} from 'react-icons/fa';
+import { MdPeople, MdAssignment, MdWork } from 'react-icons/md';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const AdminDashboard = () => {
   const [open, setOpen] = useState(false);
   const [uopen, setUopen] = useState(false);
   const [empdata, setEmpdata] = useState([]);
-  
+  const [taskdata,setTaskdata]=useState([]);
   const [viewemp, setViewemp] = useState(true);
   const [viewtasks, setViewtasks] = useState(false);
   const [viewstats, setViewstats] = useState(false);
@@ -39,6 +40,10 @@ const AdminDashboard = () => {
     axios.get("http://localhost:8080/emp/getdata")
       .then((res) => {
         setEmpdata(res.data);
+      });
+      axios.get("http://localhost:8080/emp/gettasks")
+      .then((res)=>{
+        setTaskdata(res.data)
       });
   };
 
@@ -110,6 +115,15 @@ const AdminDashboard = () => {
     navigate("/");
   };
 
+  const allemp=filterdata.filter((item)=>(item.role !== "admin"));
+  const projects=[];
+  taskdata.forEach(task =>{
+    if(!projects.includes(task.project)){
+      projects.push(task.project);
+    }
+  })
+  console.log(projects)
+
   useEffect(() => {
     
     getdata();
@@ -129,7 +143,31 @@ const AdminDashboard = () => {
           Logout
         </button>
       </div>
-
+      <div className='flex justify-center gap-5'>
+    <div className='bg-white flex justify-start items-center shadow-lg w-48 rounded-md'>
+        <div className='flex flex-col w-full p-3'>
+            <div className='flex justify-between items-center w-full mb-2'>
+                <p className='text-gray-700 font-semibold'>Total Employees</p>
+                <MdPeople className='h-6 w-6 text-blue-500' />
+            </div>
+            <p className='ml-5 text-xl font-bold text-blue-500'>{allemp.length}</p>
+        </div>
+    </div>
+    <div className='bg-white shadow-lg w-48 flex flex-col justify-start items-center rounded-md p-3'>
+        <div className='flex justify-between items-center w-full mb-2'>
+            <p className='text-gray-700 font-semibold'>Total Tasks</p>
+            <MdAssignment className='h-6 w-6 text-green-500' />
+        </div>
+        <p className='text-xl font-bold text-green-500'>{taskdata.length}</p>
+    </div>
+    <div className='bg-white shadow-lg w-48 flex flex-col justify-start items-center rounded-md p-3'>
+        <div className='flex justify-between items-center w-full mb-2'>
+            <p className='text-gray-700 font-semibold'>Total Projects</p>
+            <MdWork className='h-6 w-6 text-red-500' />
+        </div>
+        <p className='text-xl font-bold text-red-500'>{projects.length}</p>
+    </div>
+</div>
       <div className='p-5'>
         <div className='flex justify-center mb-4'>
           <button

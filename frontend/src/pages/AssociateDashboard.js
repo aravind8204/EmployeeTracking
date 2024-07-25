@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import { IoCloseOutline } from "react-icons/io5";
+
 import axios from 'axios';
 import ViewTasks from '../components/ViewTasks';
 import ViewStats from '../components/ViewStats';
@@ -10,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import AddTask from '../components/AddTask';
 import { IoIosAdd } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
-import { FaTasks, FaChartBar, FaArrowLeft,FaTrash, FaEdit, FaClipboardList, FaChartPie } from 'react-icons/fa';
+import { FaTasks, FaChartBar, FaArrowLeft, FaClipboardList, FaChartPie } from 'react-icons/fa';
 
 const AssociateDashboard = () => {
   const navigate = useNavigate();
@@ -55,7 +52,7 @@ const AssociateDashboard = () => {
 
     fetchEmpData();
     fetchTaskData();
-  }, [userid]);
+  },[]);
 
   const uniqueEmployees = {};
 

@@ -8,7 +8,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import ViewStats from '../components/ViewStats';
 import { IoIosAdd } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
-import { FaTasks, FaChartBar, FaArrowLeft,FaTrash, FaEdit, FaClipboardList, FaChartPie } from 'react-icons/fa';
+import { FaArrowLeft, FaChartPie } from 'react-icons/fa';
 
 const EmployeeDashboard = () => {
   const [inserted, setInserted] = useState(false);
@@ -20,7 +20,6 @@ const EmployeeDashboard = () => {
   const login = localStorage.getItem("login");
 
   const [dt, setDt] = useState([]);
-  const [search, setSearch] = useState("");
 
   const navigate = useNavigate();
   if (login !== "true") {
